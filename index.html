@@ -1,0 +1,92 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Audio</title>
+  </head>
+  <body>
+    <h1>Upload Audio File</h1>
+    <input type="file" id="fileInput" />
+    <button onclick="uploadFile()">Upload File</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      function uploadFile() {
+        // Get the selected file from the input
+        const fileInput = document.getElementById("fileInput");
+        const file = fileInput.files[0];
+        console.log(file);
+
+        // Create a FormData object to send the file
+        const formData = new FormData();
+        formData.append("file", file);
+
+        // Send the file to FastAPI using axios
+        axios
+          .post("http://192.168.43.34:8000/upload-audio/", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              "Access-Control-Allow-Origin": "*",
+            },
+          })
+          .then((response) => {
+            console.log("File uploaded successfully:", response.data);
+          })
+          .catch((error) => {
+            console.error("Error uploading file:", error);
+          });
+      }
+    </script>
+  </body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice to Text with Web Speech API</title>
+</head>
+<body>
+    <h1>Voice to Text</h1>
+    <button id="startButton">Start Listening</button>
+    <p id="transcription">Transcription will appear here...</p>
+
+    <script>
+        const startButton = document.getElementById('startButton');
+        const transcription = document.getElementById('transcription');
+
+        // Check if the Web Speech API is supported
+        if (!('webkitSpeechRecognition' in window)) {
+            transcription.innerHTML = 'Web Speech API not supported in this browser.';
+        }
+
+        const recognition = new webkitSpeechRecognition();
+        recognition.continuous = true;  // Keep listening until the user stops it
+        recognition.interimResults = true;  // Show results even as the user speaks
+
+        recognition.onresult = (event) => {
+            let finalTranscript = '';
+            let interimTranscript = '';
+            for (let i = event.resultIndex; i < event.results.length; i++) {
+                const result = event.results[i];
+                if (result.isFinal) {
+                    finalTranscript += result[0].transcript;
+                } else {
+                    interimTranscript += result[0].transcript;
+                }
+            }
+            transcription.innerHTML = finalTranscript || interimTranscript;
+        };
+
+        recognition.onerror = (event) => {
+            console.error('Speech recognition error:', event.error);
+            transcription.innerHTML = 'Error in recognition: ' + event.error;
+        };
+
+        startButton.addEventListener('click', () => {
+            recognition.start();
+        });
+    </script>
+</body>
+</html>

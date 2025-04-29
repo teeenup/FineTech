@@ -1,0 +1,84 @@
+{
+  "expo": {
+    "name": "task",
+    "slug": "expense",
+    "version": "1.0.2",
+    "orientation": "portrait",
+    "icon": "./assets/images/r_logo.jpg",
+    "scheme": "myapp",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/r_logo.jpg",
+        "backgroundColor": "#000",
+        "resizeMode": "contain"
+      },
+      "softwareKeyboardLayoutMode": "pan",
+      "splash": {
+        "image": "./assets/images/r_logo.jpg",
+        "resizeMode": "contain",
+        "backgroundColor": "#000"
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.USE_BIOMETRIC",
+        "android.permission.USE_FINGERPRINT",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.USE_BIOMETRIC",
+        "android.permission.USE_FINGERPRINT"
+      ],
+      "package": "com.rohit18p.expense",
+      "versionCode": 1
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/r_logo.jpg"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/r_logo.jpg",
+          "resizeMode": "contain",
+          "backgroundColor": "#000"
+        }
+      ],
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone."
+        }
+      ],
+      [
+        "expo-local-authentication",
+        {
+          "faceIDPermission": "Allow $(PRODUCT_NAME) to use Face ID."
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "452ceadf-6e30-484d-bd1b-f0144ed8aa4c"
+      }
+    },
+    "owner": "rohit18-p",
+    "runtimeVersion": "1.0.1",
+    "updates": {
+      "url": "https://u.expo.dev/452ceadf-6e30-484d-bd1b-f0144ed8aa4c"
+    }
+  }
+}
